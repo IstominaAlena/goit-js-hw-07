@@ -1,4 +1,4 @@
-// import * as basicLightbox from 'basiclightbox';
+import * as basicLightbox from 'basiclightbox';
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
@@ -41,17 +41,14 @@ function onGalleryCardClick(evt) {
     return;
   }
   const contentForModal = evt.target.dataset.source;
-  //   openModalFn(contentForModal);
+  openModalFn(contentForModal);
   console.log(contentForModal);
 }
 
-// function openModalFn(content) {
-//   const instance = basicLightbox.create(`
-//       <div class="modal">
-//           <p>
-//             тут будет картинка
-//           </p>
-//       </div>
-//   `);
-//   instance.show();
-// }
+function openModalFn(content) {
+  const instance = basicLightbox.create(`
+    <img src="${content}" width="800" height="600">
+`);
+
+  instance.show();
+}
