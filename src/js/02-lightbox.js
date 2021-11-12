@@ -3,11 +3,8 @@ import { galleryItems } from './gallery-items.js';
 
 console.log(galleryItems);
 
-const refs = {
-  galleryList: document.querySelector('.gallery'),
-  galleryCards: createGalleryItems(galleryItems),
-};
-
+const galleryCards = createGalleryItems(galleryItems);
+const galleryList = document.querySelector('.gallery');
 // Создание разметки для карточек
 function createGalleryItems(galleryItems) {
   return galleryItems
@@ -21,7 +18,7 @@ function createGalleryItems(galleryItems) {
     .join('');
 }
 
-refs.galleryList.insertAdjacentHTML('beforeend', refs.galleryCards);
+galleryList.insertAdjacentHTML('beforeend', galleryCards);
 
 new SimpleLightbox('.gallery__item', {
   captionDelay: 250,

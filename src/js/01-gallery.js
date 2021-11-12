@@ -3,10 +3,8 @@ import { galleryItems } from './gallery-items.js';
 
 console.log(galleryItems);
 
-const refs = {
-  galleryList: document.querySelector('.gallery'),
-  galleryCards: createGalleryItems(galleryItems),
-};
+const galleryList = document.querySelector('.gallery');
+const galleryCards = createGalleryItems(galleryItems);
 
 // Создание разметки для карточек
 function createGalleryItems(galleryItems) {
@@ -28,27 +26,33 @@ function createGalleryItems(galleryItems) {
     .join('');
 }
 
-refs.galleryList.insertAdjacentHTML('beforeend', refs.galleryCards);
+galleryList.insertAdjacentHTML('beforeend', galleryCards);
 
 // Делегирование событий
 
-refs.galleryList.addEventListener('click', onGalleryCardClick);
+galleryList.addEventListener('click', onGalleryCardClick);
 
 function onGalleryCardClick(evt) {
   evt.preventDefault();
+  window.addEventListener('keydown', closeModalByEsc);
   if (evt.target.nodeName !== 'IMG') {
     return;
   }
   const contentForModal = evt.target.dataset.source;
-  openModalFn(contentForModal);
-  console.log(contentForModal);
+  const instance = basicLightbox.create(`
+  <img src="${contentForModal}" width="800" height="600">
+  `);
+
+  openModalFn(instance);
+
+  function closeModalByEsc(evt) {
+    if (evt.code === 'Escape') {
+      instance.close();
+    }
+  }
 }
 
 // Модальное окно
-function openModalFn(content) {
-  const instance = basicLightbox.create(`
-    <img src="${content}" width="800" height="600">
-`);
-
+function openModalFn(instance) {
   instance.show();
 }
