@@ -1,4 +1,3 @@
-import * as basicLightbox from 'basiclightbox';
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
@@ -37,6 +36,7 @@ refs.galleryList.addEventListener('click', onGalleryCardClick);
 
 function onGalleryCardClick(evt) {
   evt.preventDefault();
+  window.addEventListener('keydown', onModalCloseByEscPress);
   if (evt.target.nodeName !== 'IMG') {
     return;
   }
@@ -45,6 +45,7 @@ function onGalleryCardClick(evt) {
   console.log(contentForModal);
 }
 
+// Модальное окно
 function openModalFn(content) {
   const instance = basicLightbox.create(`
     <img src="${content}" width="800" height="600">
