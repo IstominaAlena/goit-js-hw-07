@@ -4,7 +4,6 @@ import { galleryItems } from './gallery-items.js';
 console.log(galleryItems);
 
 const galleryList = document.querySelector('.gallery');
-const galleryCards = createGalleryItems(galleryItems);
 
 // Создание разметки для карточек
 function createGalleryItems(galleryItems) {
@@ -12,20 +11,21 @@ function createGalleryItems(galleryItems) {
     .map(({ preview, original, description }) => {
       return `
     <div class="gallery__item">
-        <a class="gallery__link" href="${original}">
-            <img
-                class="gallery__image"
-                src="${preview}"
-                data-source="${original}"
-                alt="${description}"
-            />
-        </a>
+    <a class="gallery__link" href="${original}">
+    <img
+    class="gallery__image"
+    src="${preview}"
+    data-source="${original}"
+    alt="${description}"
+    />
+    </a>
     </div>
     `;
     })
     .join('');
 }
 
+const galleryCards = createGalleryItems(galleryItems);
 galleryList.insertAdjacentHTML('beforeend', galleryCards);
 
 // Делегирование событий
