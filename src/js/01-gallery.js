@@ -36,7 +36,6 @@ refs.galleryList.addEventListener('click', onGalleryCardClick);
 
 function onGalleryCardClick(evt) {
   evt.preventDefault();
-  window.addEventListener('keydown', onModalCloseByEscPress);
   if (evt.target.nodeName !== 'IMG') {
     return;
   }
